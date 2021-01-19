@@ -1,0 +1,135 @@
+---
+title: "Variance and Std Deviation | Why divide by n-1?"
+output:
+ html_document:
+    df_print: paged
+    code_folding: hide
+    toc: TRUE
+    toc_depth: 4
+    toc_float: true
+    theme: cerulean
+    highlight: haddock
+    smart: false
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+Hello World
+
+Author: OA Lab, NWFSC
+Title: JVariance and Standard Deviation
+Date: 2021 (R document January 2021)
+
+
+#1. Creating Petrol Dataset
+
+```{r 1.0  Creating Petrol Dataset }
+
+num.wk <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+
+petrol.price <- c("48.50", "87.40", "19.98", 
+               "59.74", "40.87", "105.51",
+               "40.80", "23.10", "98.10",
+               "60.54", "64.81", "48.01")
+
+petrol.price <- as.numeric(petrol.price)
+
+petrol.wk <- data.frame(num.wk, petrol.price)
+
+
+
+
+mean.ptrl.wk <- mean(petrol.wk$petrol.price)
+ptrl.wk.variance <- var(petrol.wk$petrol.price)
+ptrl.wk.sd <- sd(petrol.wk$petrol.price)
+
+
+
+```
+
+
+
+```{r 1.1  Descriptive Statistics Petrol Dataset}
+
+view(mean.ptrl.wk)
+# 58.11333
+view(ptrl.wk.variance)
+# 748.0117
+view(ptrl.wk.sd)
+# 27.3498
+
+
+```
+
+
+
+
+
+
+```{r}
+
+hist(petrol.wk$petrol.price) 
+
+```
+
+
+
+We bother with variance to describe the "spread of the data"
+You can see the lowest observation to the highest observation
+the average deviation from the mean (squared population mean)
+
+
+Degrees of Freedom
+how singular and unqiue each of our datapoints can be 
+the number of independent pieces of information in the dataset
+
+```{r}
+dA1 <- c("1", "2", "3")
+
+dA2 <- c("41", "59", "50")
+
+dA2 <- as.numeric(dA2)
+
+dA3 <- data.frame(dA1, dA2)
+```
+
+Effect Size 
+
+Test Statistic: Observed Data - What We Expect if the Null if True
+(over)
+average variation
+
+[Comparison of Distributions]: Users/katherinerovinski/GIT/2021.01.13_mixedeffectmodel/DistributionComparison.png
+
+```{r}
+
+```
+
+
+
+average deviation  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+---
+title: "John Hopkins Mathmatical Biostatistics Boot Camp  "
+output:
+ html_document:
+    df_print: paged
+    code_folding: hide
+    toc: TRUE
+    toc_depth: 4
+    toc_float: true
+    theme: cerulean
+    highlight: haddock
+    smart: false
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+Hello World
+
+Author: OA Lab, NWFSC
+Title: JS Math-Biostat Boot Camp Week 1
+Date: 2021 (R document January 2021)
+
+
+ 

@@ -22,11 +22,49 @@ Title: Mixed Effects Model Tutorial
 Date: 2021 (R document January 2021)
 
 
+
+```{r 0.0 Libraries , echo=FALSE, results=FALSE, message=FALSE, warning=FALSE}
+#*********************************
+##Libraries
+#********************************* 
+library(stringr)
+library(tidyverse)
+library(plyr)
+library(nlme)
+library(tidyr)
+library(dbplyr)
+library(dplyr)
+library(purrr)
+library(wql)
+library(lubridate)
+library(tibbletime)
+library(arsenal)
+library(compareDF)
+#for graphing
+library(ggplot2)
+library(ggfortify)
+library(stringr)
+library(nlme)
+library(RColorBrewer)
+library(patchwork)
+#statistical analysis
+library(gdata)
+library(rsq)
+library(doBy)
+library(lme4)
+library(lmerTest)
+#Rnotebooks 
+library(gridExtra)
+library(kableExtra)
+
+```
+
 Original Tutorial Offered at: 
 [Coding Club Tutorial](https://ourcodingclub.github.io/tutorials/mixed-models/#what)
 
 
-1. What is mixed effects modelling and why does it matter?
+# 1. What is it Why does it Matter? 
+What is mixed effects modelling and why does it matter?
 Ecological and biological data are often complex and messy.     - TRUE
 We can have different grouping factors like populations, 
         species, 
@@ -48,21 +86,64 @@ This is why mixed models were developed,
         structured data and many covariates to fit. 
 
 
-Oh, and on top of all that, mixed models allow us to save degrees of freedom compared to running standard linear models! Sounds good, doesn’t it?
+Mixed models allow us to save degrees of freedom compared to running standard linear models
 
-We will cover only linear mixed models here, but if you are trying to “extend” your linear model, fear not: there are generalised linear mixed effects models out there, too.
+Version Check
+```{r 0.1 Version Check , echo=FALSE, results=FALSE, message=FALSE, warning=FALSE}
+#*********************************
+## Version Check
+#********************************* 
+R.version
+
+```
 
 
  
+# 2. Explore the data
+
+dragons ... a fictional study system
+dragons ... dataset about mountain ranges
 
 
 
+#@ 2.1) Setting Working Directory
+```{r 2.1) Setting Working Directory }
+#*********************************
+## 2.1) Setting Working Directory
+#*********************************
+
+#set working directory to the correct folder
+setwd("/Users/katherinerovinski/GIT/2021.01.13_mixedeffectmodel")
+
+load("dragons.RData")
+head(dragons)
 
 
+```
 
 
+# 2.2 Histogram - test scores and dragon body length
 
+```{r 2.2.1 Histogram. test scores and dragon body length}
+# Response variable is the test score
+hist(dragons$testScore)  
+# seems close to a normal distribution 
+```
+Standardise your explanatory variables before proceeding
+Ensure estimated coefficients are all on the same scale, 
+      make it easier to compare effect sizes
 
+Use the scale() function:
+
+```{r 2.2.2 Histogram. test scores and dragon body length}
+
+dragons$bodyLength2 <- scale(dragons$bodyLength, center = TRUE, scale = TRUE)
+
+hist(dragons$bodyLength2) 
+
+```
+
+The centered column values are divided by the column’s standard deviation
 
 
 
