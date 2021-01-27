@@ -61,13 +61,104 @@ library(kableExtra)
 
 
 
+#1. Creating Petrol Dataset
+
+```{r 1.0  Creating Petrol Dataset }
+# Bar Takings ... barTakings
+
+takingsDate <- c("2021-06-03", 
+                 "2021-06-10", 
+                 "2021-06-17", 
+                 "2021-06-24", 
+                 "2021-07-01",
+                 "2021-07-08", 
+                 "2021-07-15", 
+                 "2021-07-22", 
+                 "2021-07-29")
+
+takingsDollars <- c( 3213, 
+                     2089, 
+                     2253, 
+                     1801, 
+                     801, 
+                     1943, 
+                     1720,
+                     1514, 
+                     1017)
+
+takingsTemp <- c(23, 
+                 21,
+                 25,
+                 18,
+                 13,
+                 16,
+                 13,
+                 17,
+                 12)
+
+barTakings <- data.frame(takingsDate, takingsDollars, takingsTemp)
+
+
+```
 
 
 
 
+```{r}
+# Simple Scatter Plot 
+
+attach(barTakings)
+plot(takingsDollars, takingsTemp, main="Scatterplot Example",
+     xlab = "Takings Dollars", ylab = "Takings Temperature", pch=19)
 
 
 
 
+```
+Regression relationship is prehaps best defined as a line of best fit
+Adding a fit line
 
+```{r}
+
+#Add fit lines
+attach(barTakings)
+plot(takingsDollars, takingsTemp, main="Scatterplot Example",
+     xlab = "Takings Dollars", ylab = "Takings Temperature", pch=19)
+abline(lm(takingsTemp~takingsDollars), col="red") # regression line y~x
+lines(lowess(takingsTemp~takingsDollars), col="blue") # lowess fit line (x,y)
+
+
+```
+
+
+the r function abline can be used to add vertical, horizontal, or regression lines to a graph
+simplified format of the abline() function
+abline(a=NILL, b=NULL, v=NULL, ...)
+
+a,b : single values specifying the intercept and the slope of the line
+h : the y value(s) for the horizontal line(s)
+v : the x value(s) for the vertical line(s)
+
+LOWESS Locally Weighted Scatterplot Smoothing (LOESS- locally weighted smoothing)
+popular tool used in regression analysis that creates a smooth line through a timeplot or scatter plot to help see relationships 
+
+
+
+```{r}
+#Add fit lines
+attach(barTakings)
+plot(takingsDollars, takingsTemp, main="Scatterplot Example",
+     xlab = "Takings Dollars", ylab = "Takings Temperature", pch=19)
+# abline(lm(takingsTemp~takingsDollars), col="red") # regression line y~x
+# lines(lowess(takingsTemp~takingsDollars), col="blue") # lowess fit line (x,y)
+takingsReg <- lm(takingsDollars ~ takingsTemp, data = barTakings)
+coeff=coefficients(takingsReg)
+
+
+eq = paste0("y =", round(coeff[2],1), "*x", round(coeff[1],1))
+plot(takingsDollars, takingsTemp, main =eq)
+abline(takingsReg, col="blue")
+
+
+```
 
